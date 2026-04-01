@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMC «Алтай» — Устав</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Russo+One&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#121212; --bg2:#181818; --bg3:#1e1e1e;
+  --text:#E0E0E0; --dim:#aaa; --muted:#333;
+  --accent:#1E90FF; --acc2:#1265cc;
+  --border:rgba(255,255,255,0.07); --aborder:rgba(30,144,255,0.25);
+  --red:#cc3333;
+}
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; font-weight:300; font-size:14px; line-height:1.75; overflow-x:hidden; }
+.outer { display:block; width:100%; }
+
+/* SIDENAV */
+.sidenav {
+  position:fixed; top:0; right:0; height:100vh; width:220px;
+  background:var(--bg); border-left:1px solid var(--border);
+  display:flex; flex-direction:column; padding:32px 0 24px;
+  overflow-y:auto; z-index:500;
+  transform:translateX(calc(100% - 18px)); transition:transform 0.3s ease;
+}
+.sidenav:hover { transform:translateX(0); }
+.sidenav::before {
+  content:'◀'; position:absolute; left:0; top:50%; transform:translateY(-50%);
+  width:18px; height:48px; background:var(--bg2); border:1px solid var(--border);
+  border-right:none; font-size:7px; color:var(--accent); line-height:48px; text-align:center;
+}
+.sidenav:hover::before { content:'▶'; background:var(--bg3); }
+.sidenav-header { padding:0 20px 20px; border-bottom:1px solid var(--border); margin-bottom:16px; }
+.sidenav-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.sidenav-org { font-family:'Russo One',sans-serif; font-size:12px; letter-spacing:0.08em; color:var(--text); margin-top:6px; }
+.sidenav-org span { color:var(--accent); }
+.sidenav-links { list-style:none; display:flex; flex-direction:column; }
+.sidenav-links li a {
+  display:flex; align-items:center; gap:10px; padding:10px 20px;
+  font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--dim); text-decoration:none;
+  border-left:2px solid transparent; transition:color 0.15s,background 0.15s,border-color 0.15s;
+}
+.sidenav-links li a:hover { color:var(--text); background:var(--bg2); border-left-color:var(--accent); }
+.sidenav-links li a.active { color:var(--accent); border-left-color:var(--accent); background:rgba(30,144,255,0.06); }
+.nav-dot { width:4px; height:4px; background:var(--muted); flex-shrink:0; transition:background 0.15s; }
+.sidenav-links li a:hover .nav-dot, .sidenav-links li a.active .nav-dot { background:var(--accent); }
+.sidenav-section-label { padding:14px 20px 5px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.2em; color:var(--muted); text-transform:uppercase; }
+.sidenav-footer { padding:20px 20px 0; border-top:1px solid var(--border); margin-top:auto; }
+.sidenav-status { display:flex; align-items:center; gap:8px; }
+.live-dot { width:5px; height:5px; background:var(--accent); animation:blink 2.4s ease-in-out infinite; flex-shrink:0; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.1;} }
+.live-text { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.14em; color:var(--accent); }
+
+/* CONTENT */
+.content { width:100%; }
+
+/* HERO */
+.hero { display:grid; grid-template-columns:1fr 300px; border-bottom:1px solid var(--border); }
+.hero-left { padding:64px 64px 56px; border-right:1px solid var(--border); display:flex; flex-direction:column; justify-content:space-between; }
+.hero-tag { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+.tag-line { width:24px; height:1px; background:var(--accent); }
+.tag-text { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.18em; color:var(--accent); text-transform:uppercase; }
+.hero-title { font-family:'Russo One',sans-serif; font-size:clamp(40px,6vw,72px); line-height:0.9; text-transform:uppercase; color:var(--text); margin-bottom:24px; }
+.hero-title .blue { color:var(--accent); display:block; }
+.hero-sub { font-size:13px; color:var(--dim); line-height:1.9; border-left:2px solid var(--accent); padding-left:18px; max-width:520px; }
+.hero-right { display:flex; flex-direction:column; }
+.hstat { flex:1; padding:22px 26px; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:5px; }
+.hstat:last-child { border-bottom:none; }
+.hstat-label { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.16em; color:var(--dim); text-transform:uppercase; }
+.hstat-val { font-family:'Russo One',sans-serif; font-size:18px; color:var(--text); line-height:1.1; }
+.hstat-val.ac { color:var(--accent); font-size:12px; font-family:'Share Tech Mono',monospace; letter-spacing:0.12em; }
+.hstat-sub { font-size:11px; color:var(--dim); line-height:1.6; }
+
+/* SECTIONS */
+.sect { border-bottom:1px solid var(--border); padding:60px 64px 68px; }
+.sect-head { display:flex; align-items:baseline; justify-content:space-between; padding-bottom:18px; border-bottom:1px solid var(--border); margin-bottom:44px; }
+.sect-num { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.18em; color:var(--accent); }
+.sect-title { font-family:'Russo One',sans-serif; font-size:28px; text-transform:uppercase; letter-spacing:0.04em; color:var(--text); }
+.sect-en { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.12em; color:var(--muted); }
+
+/* ARTICLE */
+.article { background:var(--bg2); border:1px solid var(--border); margin-bottom:2px; position:relative; overflow:hidden; }
+.article::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--accent); opacity:0.2; }
+.article.high::before { opacity:0.6; }
+.article.strict::before { background:var(--red); opacity:0.7; }
+.art-head { display:flex; align-items:center; gap:16px; padding:18px 28px 14px; border-bottom:1px solid var(--border); }
+.art-num { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.18em; color:var(--accent); flex-shrink:0; }
+.article.strict .art-num { color:var(--red); }
+.art-title { font-family:'Russo One',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:0.04em; color:var(--text); }
+.art-body { padding:16px 28px 20px; }
+.art-body p { font-size:13px; color:var(--dim); line-height:1.9; margin-bottom:10px; }
+.art-body p:last-child { margin-bottom:0; }
+.art-body strong { color:var(--text); font-weight:500; }
+
+.alist { list-style:none; display:flex; flex-direction:column; }
+.alist li { display:flex; align-items:flex-start; gap:14px; font-size:13px; color:var(--dim); line-height:1.75; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+.alist li:last-child { border-bottom:none; }
+.alist li::before { content:''; width:4px; height:4px; min-width:4px; background:var(--accent); margin-top:7px; flex-shrink:0; }
+.alist li.r::before { background:var(--red); }
+.alist li strong { color:var(--text); font-weight:500; }
+
+/* PENALTIES */
+.pen-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-bottom:2px; }
+.pen-block { background:var(--bg2); border:1px solid var(--border); padding:28px 32px; }
+.pen-label { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.16em; color:var(--dim); text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.pen-label::before { content:''; width:4px; height:4px; background:var(--dim); flex-shrink:0; }
+.pen-label.red { color:var(--red); }
+.pen-label.red::before { background:var(--red); }
+.pen-list { list-style:none; display:flex; flex-direction:column; }
+.pen-item { display:flex; align-items:flex-start; gap:12px; font-size:13px; color:var(--dim); line-height:1.7; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+.pen-item:last-child { border-bottom:none; }
+.pdot { width:6px; height:6px; min-width:6px; margin-top:6px; flex-shrink:0; }
+.pdot.warn { background:#cc8800; }
+.pdot.kick { background:var(--red); }
+
+/* OATH */
+.oath { background:var(--bg2); border:1px solid var(--border); border-left:3px solid var(--accent); padding:44px 52px; text-align:center; }
+.oath-label { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.2em; color:var(--accent); text-transform:uppercase; margin-bottom:28px; }
+.oath-text { font-size:15px; color:var(--text); line-height:2.2; max-width:620px; margin:0 auto 28px; font-style:italic; font-weight:300; }
+.oath-sign { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:0.16em; color:var(--dim); text-transform:uppercase; }
+
+/* FOOTER */
+footer { padding:24px 64px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.footer-logo { font-family:'Russo One',sans-serif; font-size:13px; letter-spacing:0.1em; color:var(--muted); }
+.footer-logo span { color:var(--accent); }
+.footer-meta { display:flex; gap:28px; }
+.fmi { font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:0.12em; color:var(--muted); }
+.fmi em { color:var(--dim); font-style:normal; }
+
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--muted); }
+::-webkit-scrollbar-thumb:hover { background:var(--accent); }
+</style>
+</head>
+<body>
+<div class="outer">
+<div class="content">
+
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div>
+      <div class="hero-tag">
+        <div class="tag-line"></div>
+        <div class="tag-text">Внутренний документ · Редакция 1.1</div>
+      </div>
+      <h1 class="hero-title">Устав<br><span class="blue">PMC «Алтай»</span></h1>
+      <p class="hero-sub">Настоящий устав определяет правила поведения, субординацию и порядок несения службы в рядах Контрактной Боевой Группы Алтай. Незнание устава не освобождает от ответственности за его нарушение.</p>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hstat">
+      <div class="hstat-label">Документ</div>
+      <div class="hstat-val" style="font-size:14px;">Устав ЧВК «Алтай»</div>
+      <div class="hstat-sub">Обязателен для всего личного состава</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">Редакция</div>
+      <div class="hstat-val">1.1</div>
+      <div class="hstat-sub">Вступает в силу с момента принятия в ряды</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">Статус</div>
+      <div class="hstat-val ac">ДЕЙСТВУЕТ</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-label">Разделов</div>
+      <div class="hstat-val">6</div>
+      <div class="hstat-sub">Положения, субординация, поведение, операции, взыскания, клятва</div>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="general">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">I</div>
+      <div class="sect-title">Общие положения</div>
+    </div>
+    <div class="sect-en">GENERAL / PROVISIONS</div>
+  </div>
+
+  <div class="article high">
+    <div class="art-head"><div class="art-num">СТ. 1</div><div class="art-title">Статус организации</div></div>
+    <div class="art-body">
+      <p>PMC «Алтай» — Контрактная Боевая Группа Алтай — является автономной военной структурой с единой вертикалью командования. Организация действует на основании настоящего устава, приказов командования и принципов воинской дисциплины.</p>
+      <p>Членство в PMC «Алтай» означает полное и безоговорочное принятие всех положений настоящего устава.</p>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 2</div><div class="art-title">Лозунг и символика</div></div>
+    <div class="art-body">
+      <p>Официальный лозунг PMC «Алтай»: <strong>«Профессионализм. Дисциплина. Надёжность.»</strong></p>
+      <p>Девиз организации: <strong style="color:var(--accent);">«За нами будущее»</strong></p>
+      <p>Символика фракции — эмблема с изображением манула — является знаком принадлежности к структуре и должна использоваться с уважением.</p>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 3</div><div class="art-title">Принципы организации</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li><strong>Дисциплина</strong> — основа боеспособности. Без дисциплины нет организации.</li>
+        <li><strong>Профессионализм</strong> — каждый боец несёт ответственность за качество своих действий.</li>
+        <li><strong>Надёжность</strong> — слово бойца PMC «Алтай» не расходится с делом.</li>
+        <li><strong>Единство</strong> — личный состав действует как единый организм, личные амбиции не ставятся выше интересов фракции.</li>
+        <li><strong>Честь</strong> — репутация фракции является коллективной ответственностью каждого.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="hierarchy">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">II</div>
+      <div class="sect-title">Субординация</div>
+    </div>
+    <div class="sect-en">HIERARCHY / CHAIN OF COMMAND</div>
+  </div>
+
+  <div class="article high">
+    <div class="art-head"><div class="art-num">СТ. 4</div><div class="art-title">Вертикаль командования</div></div>
+    <div class="art-body">
+      <p>В PMC «Алтай» действует строгая вертикаль командования. Приказы исполняются без возражений, промедления и самодеятельности. Обсуждение приказа допустимо только вне боевого выхода и только через установленные каналы.</p>
+      <ul class="alist">
+        <li>Командир ЧВК обладает высшим авторитетом в организации. Его решения окончательны.</li>
+        <li>Заместитель командира ЧВК действует с полномочиями командира в его отсутствие.</li>
+        <li>Командиры подразделений несут полную ответственность за личный состав своих подразделений.</li>
+        <li>Сержантский состав обеспечивает исполнение приказов в рядах бойцов.</li>
+        <li>Боец обязан выполнять приказы любого вышестоящего по званию.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 5</div><div class="art-title">Обращение и этикет</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li>Обращение к вышестоящим по званию — уважительное, без панибратства в боевой обстановке.</li>
+        <li>Споры с командованием в ходе операции — грубое нарушение устава.</li>
+        <li>Разногласия с решением командования выносятся на обсуждение после завершения операции.</li>
+        <li>Самовольное принятие тактических решений без согласования с командиром — нарушение субординации.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="conduct">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">III</div>
+      <div class="sect-title">Поведение</div>
+    </div>
+    <div class="sect-en">CONDUCT / BEHAVIOR</div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 6</div><div class="art-title">Общие нормы поведения</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li>Уважительное отношение ко всем членам фракции обязательно вне зависимости от звания.</li>
+        <li>Токсичность, оскорбления, провокации и травля в адрес союзников категорически запрещены.</li>
+        <li>Личные конфликты между бойцами решаются внутри структуры, не выносятся публично.</li>
+        <li>Распространение внутренней информации фракции без разрешения командования запрещено.</li>
+        <li>Публичная дискредитация PMC «Алтай» является грубым нарушением устава.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 7</div><div class="art-title">Активность</div></div>
+    <div class="art-body">
+      <p>Каждый боец обязан поддерживать активность в рядах фракции. Минимальный порог — участие в боевых выходах не реже двух раз в неделю при наличии возможности.</p>
+      <ul class="alist">
+        <li>О плановом отсутствии необходимо уведомить командование заблаговременно.</li>
+        <li>Неявка на плановые операции без предупреждения расценивается как нарушение дисциплины.</li>
+        <li>Отсутствие без уведомления более 7 дней может повлечь исключение из рядов.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article strict">
+    <div class="art-head"><div class="art-num">СТ. 8</div><div class="art-title">Абсолютные запреты</div></div>
+    <div class="art-body">
+      <p>Следующие действия являются грубейшими нарушениями устава и влекут немедленное исключение без предупреждения:</p>
+      <ul class="alist">
+        <li class="r">Дезертирство — самовольное оставление боевого выхода в ходе активной операции.</li>
+        <li class="r">Предательство — передача информации или оказание помощи противнику.</li>
+        <li class="r">Умышленный огонь по союзникам (тимкилл) без обоснованных обстоятельств.</li>
+        <li class="r">Систематическое неисполнение приказов командования.</li>
+        <li class="r">Публичная дискредитация фракции и её командования.</li>
+        <li class="r">Вступление в конкурирующие фракции без официального выхода из PMC «Алтай».</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="operations">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">IV</div>
+      <div class="sect-title">Боевые операции</div>
+    </div>
+    <div class="sect-en">OPERATIONS / COMBAT</div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 9</div><div class="art-title">Подготовка к операции</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li>Каждая операция планируется командованием. Цели, задачи и роли доводятся до личного состава до начала выхода.</li>
+        <li>Боец обязан прибыть на точку сбора в назначенное время. Опоздание без предупреждения — нарушение дисциплины.</li>
+        <li>В ходе брифинга запрещено перебивать командира и отвлекаться на посторонние темы.</li>
+        <li>Снаряжение и боеготовность — личная ответственность каждого бойца.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article high">
+    <div class="art-head"><div class="art-num">СТ. 10</div><div class="art-title">Классификация приоритетов</div></div>
+    <div class="art-body">
+      <p>Для определения важности и срочности задач в ходе операций используется комбинированный индекс (Буква-Цифра):</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 15px;">
+        <div>
+          <strong style="color: var(--accent); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 0.1em; display: block; margin-bottom: 12px;">// ВАЖНОСТЬ (БУКВА)</strong>
+          <ul class="alist">
+            <li><strong>A (Стратегическая):</strong> Критическая важность. Провал недопустим.</li>
+            <li><strong>B (Оперативная):</strong> Высокая важность для миссии.</li>
+            <li><strong>C (Тактическая):</strong> Второстепенные задачи.</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color: var(--accent); font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 0.1em; display: block; margin-bottom: 12px;">// СРОЧНОСТЬ (ЦИФРА)</strong>
+          <ul class="alist">
+            <li><strong>1 (Экстренная):</strong> Немедленное исполнение.</li>
+            <li><strong>2 (Приоритетная):</strong> Оперативно (в течении определенного времени).</li>
+            <li><strong>3 (Штатная):</strong> В штатном плановом режиме.</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 20px; font-size: 12px; color: var(--text);">Приоритет <strong>A-1</strong> является абсолютным — выполнение задачи становится единственным приоритетом до её завершения.</p>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 11</div><div class="art-title">Поведение в бою</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li>В ходе операции бойцы действуют строго по задачам, поставленным командиром.</li>
+        <li>Самовольное отступление от тактического плана без команды — нарушение субординации.</li>
+        <li>Радиообмен в бою — чёткий, без лишних слов. Посторонние разговоры в эфире запрещены.</li>
+        <li>При получении ранения боец немедленно докладывает позицию и статус командиру.</li>
+        <li>Отход с позиции осуществляется только по команде или при критической угрозе.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article">
+    <div class="art-head"><div class="art-num">СТ. 12</div><div class="art-title">Разбор операции</div></div>
+    <div class="art-body">
+      <p>По завершении каждого боевого выхода командование проводит краткий разбор. Участие личного состава обязательно.</p>
+      <ul class="alist">
+        <li>Бойцы вправе высказываться о ходе операции в уважительной форме.</li>
+        <li>Критика тактических решений командира допустима только в формате разбора.</li>
+        <li>Результаты разбора учитываются при планировании следующих выходов.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="penalties">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">V</div>
+      <div class="sect-title">Взыскания</div>
+    </div>
+    <div class="sect-en">PENALTIES / SANCTIONS</div>
+  </div>
+
+  <div class="pen-grid">
+    <div class="pen-block">
+      <div class="pen-label">Выговоры</div>
+      <ul class="pen-list">
+        <li class="pen-item"><div class="pdot warn"></div><span>Опоздание на операцию без предупреждения — устный выговор</span></li>
+        <li class="pen-item"><div class="pdot warn"></div><span>Нарушение радиодисциплины в бою — замечание от командира</span></li>
+        <li class="pen-item"><div class="pdot warn"></div><span>Самовольное тактическое решение — письменный выговор</span></li>
+        <li class="pen-item"><div class="pdot warn"></div><span>Неуважительное обращение к бойцам — предупреждение</span></li>
+        <li class="pen-item"><div class="pdot warn"></div><span>Низкая активность без уведомления — выговор от командира</span></li>
+      </ul>
+    </div>
+    <div class="pen-block">
+      <div class="pen-label red">Немедленное исключение</div>
+      <ul class="pen-list">
+        <li class="pen-item"><div class="pdot kick"></div><span>Дезертирство в ходе активной операции</span></li>
+        <li class="pen-item"><div class="pdot kick"></div><span>Предательство интересов фракции</span></li>
+        <li class="pen-item"><div class="pdot kick"></div><span>Умышленный огонь по своим</span></li>
+        <li class="pen-item"><div class="pdot kick"></div><span>Систематическое (3+) нарушение субординации</span></li>
+        <li class="pen-item"><div class="pdot kick"></div><span>Публичная дискредитация PMC «Алтай»</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="article" style="margin-top:2px;">
+    <div class="art-head"><div class="art-num">СТ. 13</div><div class="art-title">Порядок применения взысканий</div></div>
+    <div class="art-body">
+      <ul class="alist">
+        <li>Взыскания применяются командованием по факту нарушения. Боец уведомляется лично.</li>
+        <li>При накоплении трёх предупреждений командование вправе понизить в звании или исключить.</li>
+        <li>Решение об исключении принимается Командиром ЧВК или его заместителем.</li>
+        <li>Повторное вступление после исключения — только по решению Командира ЧВК.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sect" id="oath">
+  <div class="sect-head">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div class="sect-num">VI</div>
+      <div class="sect-title">Клятва бойца</div>
+    </div>
+    <div class="sect-en">OATH / PLEDGE</div>
+  </div>
+
+  <div class="oath">
+    <div class="oath-label">Клятва произносится при вступлении в ряды PMC «Алтай»</div>
+    <div class="oath-text">
+      «Вступая в ряды ЧВК "Алтай", я клянусь соблюдать устав и приказы командования, действовать с честью и профессионализмом в любой обстановке, не оставлять товарищей и не предавать интересы фракции. Я принимаю на себя ответственность за репутацию и боеспособность Контрактной Боевой Группы Алтай. За нами будущее.»
+    </div>
+    <div class="oath-sign">PMC «Алтай» · Контрактная Боевая Группа · Редакция устава 1.1</div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">PMC <span>АЛТАЙ</span></div>
+  <div class="footer-meta">
+    <div class="fmi">УСТАВ <em>РЕД. 1.0</em></div>
+    <div class="fmi">БАЗА <em>АДАК</em></div>
+    <div class="fmi">«ЗА НАМИ БУДУЩЕЕ»</div>
+  </div>
+</footer>
+</div>
+
+<nav class="sidenav">
+  <div class="sidenav-header">
+    <div class="sidenav-label">Навигация</div>
+    <div class="sidenav-org">PMC <span>АЛТАЙ</span></div>
+  </div>
+  <div class="sidenav-section-label">Страницы</div>
+  <ul class="sidenav-links">
+    <li><a href="https://pmc-altai.netlify.app/altai-main#"><div class="nav-dot"></div>Главная</a></li>
+    <li><a href="https://pmc-altai.netlify.app/altai-operations#"><div class="nav-dot"></div>Операции</a></li>
+    <li><a href="#"><div class="nav-dot"></div>Личный состав</a></li>
+    <li><a href="https://pmc-altai.netlify.app/altai-charter#" class="active"><div class="nav-dot"></div>Устав</a></li>
+    <li><a href="https://pmc-altai.netlify.app/altai-join#"><div class="nav-dot"></div>Вступление</a></li>
+  </ul>
+  <div class="sidenav-section-label" style="margin-top:auto;">На странице</div>
+  <ul class="sidenav-links" id="page-nav">
+    <li><a href="#top"><div class="nav-dot"></div>Начало</a></li>
+    <li><a href="#general"><div class="nav-dot"></div>I. Положения</a></li>
+    <li><a href="#hierarchy"><div class="nav-dot"></div>II. Субординация</a></li>
+    <li><a href="#conduct"><div class="nav-dot"></div>III. Поведение</a></li>
+    <li><a href="#operations"><div class="nav-dot"></div>IV. Операции</a></li>
+    <li><a href="#penalties"><div class="nav-dot"></div>V. Взыскания</a></li>
+    <li><a href="#oath"><div class="nav-dot"></div>VI. Клятва</a></li>
+  </ul>
+  <div class="sidenav-footer">
+    <div class="sidenav-status">
+      <div class="live-dot"></div>
+      <div class="live-text">РЕД. 1.0 · ДЕЙСТВУЕТ</div>
+    </div>
+  </div>
+</nav>
+</div>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    });
+  });
+  const sections = document.querySelectorAll('section[id]');
+  const sideLinks = document.querySelectorAll('#page-nav a[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sideLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`#page-nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin:'-20% 0px -60% 0px', threshold:0 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
